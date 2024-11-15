@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/components/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/ui": ["./components/ui/index.js"],
+      "@/utils": ["./utils/index.js"],
+      "@/locales": ["./locales/index.js"],
+      "@/hooks": ["./hooks/index.js"]
     }
   }
 }
