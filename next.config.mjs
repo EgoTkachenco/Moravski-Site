@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: false,
   i18n: {
-    locales: ['default', 'en', 'ua'],
-    defaultLocale: 'default',
+    locales: ['en', 'ua'],
+    defaultLocale: 'ua',
     localeDetection: false,
   },
   rewrites: async () => {
