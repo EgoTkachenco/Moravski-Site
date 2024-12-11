@@ -4,13 +4,13 @@ import Layout from '@/components/layout'
 import { getPageProps } from '@/utils'
 
 export default function Home({ page, general }) {
-  console.log(page)
+  const bannerBlock = page.blocks[0]
 
   return (
     <Layout general={general} page={page} animated>
-      <BannerBlock />
+      <BannerBlock block={bannerBlock} />
 
-      {page.blocks.map((block, index) => (
+      {page.blocks.slice(1).map((block, index) => (
         <StrapiBlock key={index} block={block} />
       ))}
     </Layout>

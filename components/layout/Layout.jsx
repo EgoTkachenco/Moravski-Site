@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import Header from './Header'
 import Metadata from './Metadata'
 
@@ -12,7 +13,3 @@ const Layout = ({ page, general, children, animated = false }) => (
 )
 
 export default Layout
-
-const Footer = () => {
-  return <footer>Footer</footer>
-}

@@ -8,8 +8,6 @@ import {
 } from '@/ui'
 
 const TextBlock = (props) => {
-  console.log(props)
-
   const { title, subtitle, content, block_name, image, layout } = props
 
   if (layout === 'image bottom')

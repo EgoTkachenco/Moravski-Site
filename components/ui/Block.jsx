@@ -1,14 +1,19 @@
 import Image from 'next/image'
+import { forwardRef } from 'react'
 
-const Block = ({ className = '', children, containerClassName = '' }) => (
-  <div className={`flex flex-col ${containerClassName}`}>
-    <div
-      className={`${className} gap-y-8 gap-x-16 flex-grow max-w-screen-2xl w-full p-8 md:p-16 mx-auto text-lg text-white`}
-    >
-      {children}
+const Block = forwardRef(
+  ({ className = '', children, containerClassName = '' }, ref) => (
+    <div ref={ref} className={`flex flex-col relative ${containerClassName}`}>
+      <div
+        className={`gap-y-8 gap-x-16 flex-grow max-w-screen-2xl w-full p-8 md:p-16 mx-auto text-lg text-white ${className}`}
+      >
+        {children}
+      </div>
     </div>
-  </div>
+  )
 )
+
+Block.displayName = 'Block'
 
 export default Block
 

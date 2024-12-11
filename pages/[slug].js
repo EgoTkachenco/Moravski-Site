@@ -18,8 +18,9 @@ export default function DynamicPage({ page, general }) {
 export async function getServerSideProps(ctx) {
   const slug = ctx.params.slug
 
-  const props = getPageProps(ctx, slug)
-  if (!props)
+  const props = await getPageProps(ctx, slug)
+
+  if (!props || !props.page)
     return {
       redirect: {
         destination: '/not-found',

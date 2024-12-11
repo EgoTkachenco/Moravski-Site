@@ -18,6 +18,12 @@ export const getPageDetails = (slug, locale, is_custom = false) =>
                   cards: { populate: '*' },
                 },
               },
+              'blocks.carousel': {
+                populate: {
+                  slides: { populate: '*' },
+                },
+              },
+              'blocks.support-block': { populate: '*' },
             },
           },
         },
