@@ -20,9 +20,30 @@ const nextConfig = {
         source: '/api/:path*',
         destination: process.env.API_URL + '/api/:path*',
       },
+      // Strapi Admin rewrites
+      {
+        source: '/admin',
+        destination: process.env.API_URL + '/admin',
+      },
       {
         source: '/admin/:path*',
-        destination: process.env.API_URL + '/:path*',
+        destination: process.env.API_URL + '/admin' + '/:path*',
+      },
+      {
+        source: '/content-manager/:path*',
+        destination: process.env.API_URL + '/content-manager/:path*',
+      },
+      {
+        source: '/content-type-builder/:path*',
+        destination: process.env.API_URL + '/content-type-builder/:path*',
+      },
+      {
+        source: '/i18n/:path*',
+        destination: process.env.API_URL + '/i18n/:path*',
+      },
+      {
+        source: '/upload/:path*',
+        destination: process.env.API_URL + '/upload/:path*',
       },
     ]
   },
