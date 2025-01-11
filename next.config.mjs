@@ -20,6 +20,10 @@ const nextConfig = {
         source: '/api/:path*',
         destination: process.env.API_URL + '/api/:path*',
       },
+      {
+        source: '/admin/:path*',
+        destination: process.env.API_URL + '/:path*',
+      },
     ]
   },
 }
