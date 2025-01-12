@@ -45,7 +45,7 @@ const TextBlock = (props) => {
       <Block className="flex flex-wrap">
         <BlockName>{block_name}</BlockName>
 
-        <BlockColumn>
+        <BlockColumn className="md:py-16">
           <BlockTitle>{title}</BlockTitle>
           <div>{subtitle}</div>
           <div dangerouslySetInnerHTML={{ __html: content }} />

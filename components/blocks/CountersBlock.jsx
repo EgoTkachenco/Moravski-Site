@@ -4,7 +4,7 @@ import CountUp from 'react-countup'
 const CountersBlock = ({ counters }) => {
   return (
     <Block>
-      <div className="flex justify-center gap-0 column md:flex-row">
+      <div className="flex flex-col items-center justify-center gap-0 md:flex-row">
         {counters.map(({ label, count }, i) => (
           <Counter key={i} label={label} count={count} />
         ))}
@@ -16,7 +16,7 @@ const CountersBlock = ({ counters }) => {
 export default CountersBlock
 
 const Counter = ({ count, label }) => (
-  <div className="w-60 text-center md:border-r md:border-t-0 border-t border-white last:border-none">
+  <div className="py-8 text-center border-b border-white w-60 md:border-r md:border-b-0 last:border-none md:py-0">
     <CountUp
       start={count > 100 ? count - 100 : 0}
       end={count}

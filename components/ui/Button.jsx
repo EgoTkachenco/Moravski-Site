@@ -9,6 +9,7 @@ const Button = ({
   variant = 'primary',
   type = 'button',
   className,
+  href,
   ...props
 }) => {
   const variantClassName = VARIANTS[variant] || VARIANTS.primary
@@ -16,7 +17,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`font-semibold py-2 px-8 rounded-full transition-all flex gap-2 items-center  ${variantClassName} ${className}`}
+      className={`text-base font-semibold py-3 px-8 rounded-full transition-all flex gap-2 items-center justify-center ${variantClassName} ${className}`}
       {...props}
     >
       {children}

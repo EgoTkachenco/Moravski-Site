@@ -1,5 +1,6 @@
 import { useText } from '@/locales'
 import { Block, BlockTitle, Button, Icon } from '@/ui'
+import Link from 'next/link'
 
 const SupportBlock = ({ title }) => {
   const t = useText()
@@ -8,8 +9,10 @@ const SupportBlock = ({ title }) => {
       <div className="bg-[url(/support_back.svg)] bg-cover p-4 md:p-20">
         <BlockTitle className="md:max-w-xl text-dark">{title}</BlockTitle>
 
-        <div className="flex gap-4">
-          <Button>{t('support-us')}</Button>
+        <div className="flex flex-col gap-4 md:flex-row">
+          <Link href="/support">
+            <Button className="w-full">{t('support-us')}</Button>
+          </Link>
           <Button variant="white">
             <Icon icon="buymeacoffee" />
             Buy me a coffee

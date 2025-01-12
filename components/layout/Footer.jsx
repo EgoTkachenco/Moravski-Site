@@ -14,8 +14,8 @@ const Footer = ({ general }) => {
   ]
   return (
     <footer>
-      <Block className="md:pt-0 pt-0 md:pb-12 pb-4">
-        <div className="flex gap-8 border-t border-gray-200 md:pt-12 pt-4">
+      <Block className="pt-0 pb-4 md:pt-0 md:pb-12">
+        <div className="flex flex-col items-center gap-8 pt-4 border-t border-gray-200 md:items-start md:flex-row md:pt-12">
           <div className="flex flex-col gap-4">
             <Image
               src="/logo-white.svg"
@@ -38,7 +38,7 @@ const Footer = ({ general }) => {
             </div>
           </div>
 
-          <div className="flex flex-col items-end gap-4 ml-auto">
+          <div className="flex flex-col items-center gap-4 md:items-end md:ml-auto">
             <div className="flex gap-4">
               {/* <Image src="/email.svg" alt="email" width={24} height={24} /> */}
               <a href={`mailto:${email}`}>{email}</a>

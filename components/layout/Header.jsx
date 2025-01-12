@@ -1,16 +1,22 @@
 import { useIsTop } from '@/hooks'
 import { useLocale, useText } from '@/locales'
-import { Button } from '@/ui'
+import { Button, Icon } from '@/ui'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const Header = ({ animated = false, general }) => {
   const pathname = usePathname()
   const { locale } = useLocale()
   const t = useText()
-
   const isTransparent = useIsTop(animated)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto'
+  }
 
   return (
     <header
@@ -18,8 +24,8 @@ const Header = ({ animated = false, general }) => {
         isTransparent ? 'bg-transparent' : 'bg-white'
       } fixed transition-colors w-full top-0 z-50`}
     >
-      <div className="max-w-screen-2xl w-full h-20 flex items-center px-8 md:px-16 mx-auto">
-        <Link href="/">
+      <div className="flex items-center w-full h-20 px-8 mx-auto max-w-screen-2xl md:px-16">
+        <Link href="/" className="cursor-pointer">
           <Image
             src={general.logo.url}
             alt="Moravski"
@@ -28,7 +34,8 @@ const Header = ({ animated = false, general }) => {
           />
         </Link>
 
-        <div className="flex gap-4 ml-16">
+        {/* Desktop Navigation */}
+        <div className="hidden gap-4 ml-16 md:flex">
           {general.navigation_links.map((item, index) => (
             <NavigationLink
               isActive={pathname.includes('/' + item.slug)}
@@ -40,15 +47,69 @@ const Header = ({ animated = false, general }) => {
           ))}
         </div>
 
-        <NavigationLink
-          href={pathname}
-          locale={locale === 'ua' ? 'en' : 'ua'}
-          className="ml-auto mr-4"
-        >
-          {locale === 'ua' ? 'EN' : 'UA'}
-        </NavigationLink>
+        <div className="items-center hidden ml-auto md:flex">
+          <NavigationLink
+            href={pathname}
+            locale={locale === 'ua' ? 'en' : 'ua'}
+            className="mr-4"
+          >
+            {locale === 'ua' ? 'EN' : 'UA'}
+          </NavigationLink>
 
-        <Button>{t('support-us')}</Button>
+          <Link href="/support">
+            <Button>{t('support-us')}</Button>
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="p-2 ml-auto md:hidden"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <Icon icon="menu" className="w-6 h-6" />
+        </button>
+
+        {/* Mobile Menu */}
+        <div
+          className={`fixed inset-0 bg-white z-40 md:hidden transition-transform duration-300 ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex items-center justify-end h-20 px-8">
+            <button
+              className="p-2 md:hidden"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <Icon icon="close" className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="container px-4 mx-auto">
+            <nav className="flex flex-col space-y-6">
+              {general.navigation_links.map((item, index) => (
+                <NavigationLink
+                  key={index}
+                  href={'/' + item.slug}
+                  isActive={pathname.includes('/' + item.slug)}
+                  onClick={toggleMenu}
+                >
+                  {item.title}
+                </NavigationLink>
+              ))}
+              <NavigationLink
+                href={pathname}
+                locale={locale === 'ua' ? 'en' : 'ua'}
+                onClick={toggleMenu}
+              >
+                {locale === 'ua' ? 'EN' : 'UA'}
+              </NavigationLink>
+              <Link href="/support" onClick={toggleMenu}>
+                <Button className="w-full">{t('support-us')}</Button>
+              </Link>
+            </nav>
+          </div>
+        </div>
       </div>
     </header>
   )
@@ -62,18 +123,20 @@ const NavigationLink = ({
   isActive,
   locale,
   className = '',
+  onClick,
 }) => (
   <Link
     href={href}
-    className={`text-lg text-black font-medium group ${className}`}
+    className={`text-lg text-black font-medium group cursor-pointer ${className}`}
     locale={locale}
+    onClick={onClick}
   >
     {children}
 
     <div
       className={`${
         isActive ? 'w-full' : 'w-0'
-      } bg-dark h-[2px] rounded  group-hover:w-full transition-all`}
+      } bg-dark h-[2px] rounded group-hover:w-full transition-all`}
     />
   </Link>
 )

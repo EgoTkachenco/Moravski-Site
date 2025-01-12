@@ -45,6 +45,10 @@ const nextConfig = {
         source: '/upload/:path*',
         destination: process.env.API_URL + '/upload/:path*',
       },
+      {
+        source: '/users-permissions/:path*',
+        destination: process.env.API_URL + '/users-permissions/:path*',
+      },
     ]
   },
 }

@@ -62,26 +62,26 @@ const BannerBlock = ({ block }) => {
   return (
     <Block
       className="flex flex-wrap grow-0"
-      containerClassName="banner-container h-screen bg-cover bg-[url(/banner.jpg)]"
+      containerClassName="banner-container min-h-screen bg-cover bg-[url(/banner.jpg)]"
     >
       <div
         id="banner-background"
-        className="absolute inset-0 bg-dark opacity-0"
+        className="absolute inset-0 opacity-0 bg-dark"
       />
 
       <div
         id="banner-title"
-        className="relative w-full font-medium uppercase text-dark mt-24 mb-8"
+        className="relative w-full mt-24 mb-8 font-medium uppercase text-dark"
       >
         <h2 className="text-4xl">
           {block.title.split(' ').slice(0, 2).join(' ')}
         </h2>
-        <h1 className="text-8xl">{block.title.split(' ')[2]}</h1>
+        <h1 className="text-6xl md:text-8xl">{block.title.split(' ')[2]}</h1>
       </div>
 
       {/* <BlockColumn id="banner-btns" className="relative">
         <Button variant="dark">{t('join-us')}</Button>
-        <Link href="/support" className="text-dark mt-16">
+        <Link href="/support" className="mt-16 text-dark">
           {t('support-us')}
         </Link>
       </BlockColumn> */}

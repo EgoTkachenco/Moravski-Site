@@ -46,3 +46,40 @@ export const getGeneralInformation = (locale) =>
       },
     })
     .then((res) => res.data)
+
+export const getPosts = (locale, page) =>
+  axios.get('/posts', {
+    params: {
+      // filters: {},
+      sort: 'createdAt:desc',
+      locale: locale === 'ua' ? 'uk' : locale,
+      populate: '*',
+      pagination: { page, pageSize: 10 },
+    },
+  })
+
+export const getPost = (id, locale) =>
+  axios.get(`/posts/${id}`, {
+    params: {
+      locale: locale === 'ua' ? 'uk' : locale,
+      populate: '*',
+    },
+  })
+
+export const getConcerts = (locale, page) =>
+  axios.get('/concerts', {
+    params: {
+      sort: 'createdAt:desc',
+      locale: locale === 'ua' ? 'uk' : locale,
+      populate: '*',
+      pagination: { page, pageSize: 10 },
+    },
+  })
+
+export const getConcert = (id, locale) =>
+  axios.get(`/concerts/${id}`, {
+    params: {
+      locale: locale === 'ua' ? 'uk' : locale,
+      populate: '*',
+    },
+  })

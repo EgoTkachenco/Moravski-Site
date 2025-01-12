@@ -1,18 +1,32 @@
 'use client'
-import { Block, BlockName, BlockTitle } from '@/ui'
+import { Block, BlockName, BlockPageLink, BlockTitle } from '@/ui'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/parallax'
 import 'swiper/css/effect-coverflow'
 import Image from 'next/image'
+import { useText } from '@/locales'
+import Link from 'next/link'
 
-const CarouselBlock = ({ block_name, title, slides }) => {
+const CarouselBlock = ({ block_name, title, slides, type }) => {
+  const t = useText()
+  const page = type === 'future concerts' ? '/concerts' : null
   return (
-    <Block>
-      <BlockName>{block_name}</BlockName>
+    <div className="mb-12">
+      <Block>
+        <BlockName>{block_name}</BlockName>
+        <div className="flex flex-col-reverse items-end justify-between md:flex-row">
+          <BlockTitle>{title}</BlockTitle>
 
-      <BlockTitle>{title}</BlockTitle>
+          {page && (
+            <BlockPageLink className="mb-8" href={page}>
+              {t('see-all')}
+            </BlockPageLink>
+          )}
+        </div>
+      </Block>
+
       <Swiper
         loop={true}
         speed={800}
@@ -47,25 +61,20 @@ const CarouselBlock = ({ block_name, title, slides }) => {
         }}
         data-aos="fade-up"
       >
-        {[1, 2, 3, 4, 5, 6, 6, 7, 8, 9].map((slide, i) => (
+        {slides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <ConcertSlide />
-            {/* <Link href={routes.concerts + '/' + slide.slug}>
-              <div className={styles.slide_image}>
-                <img src={slide.image} alt={slide.title} />
-              </div>
-            </Link> */}
+            <ConcertSlide {...slide} />
           </SwiperSlide>
         ))}
       </Swiper>
-    </Block>
+    </div>
   )
 }
 
 export default CarouselBlock
 
-const ConcertSlide = () => (
-  <div className="relative h-[400px]">
-    <Image src="/news/news1.png" alt="news" fill objectFit="cover" />
-  </div>
+const ConcertSlide = ({ title, image, documentId }) => (
+  <Link href={'/concerts/' + documentId} className="block relative h-[400px]">
+    <Image src={image.url} alt={title} fill objectFit="cover" />
+  </Link>
 )
